@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
 // import Navbar from "./components/Navbar";
-// import SignupForm from "./components/SignupForm"
-// import LoginForm from "./components/LoginForm"
+import SignupForm from "./components/SignupForm"
+import LoginForm from "./components/LoginForm"
 import MtgcardsContainer from "./components/MtgcardsContainer"
 // import MtgcardsDetail from "./components/MtgcardsDetail"
 // import AuctionbidForm from "./components/AuctionbidForm"
-// import About from './components/About'
+import About from './components/About'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
 
@@ -62,16 +62,16 @@ class App extends Component {
       .then(mtgcardArray => this.setState({ mtgcardsContainer: mtgcardArray }))
   }
 
-  mtgcardscontainer = () => <MtgcardsContainer mtgcards={this.state.mtgcardsContainer} />
+  mtgcardscontainer = () => <MtgcardsContainer renderMtgcards={this.state.mtgcardsContainer} />
 
   render() {
     return (
       <div className="App">
         <Switch>
-          {/* <Route path='/signup' exact render={() => <SignupForm handleSignup={this.handleSignup} />} />
-          <Route path='/login' exact render={() => <LoginForm handleLogin={this.handleLogin} />} /> */}
+          <Route path='/signup' render={() => <SignupForm handleSignup={this.handleSignup} />} />
+          <Route path='/login' render={() => <LoginForm handleLogin={this.handleLogin} />} />
           <Route path='/MtgcardsContainer' component={this.mtgcardscontainer} />
-          {/* <Route path='/' component={About} /> */}
+          <Route path='/' component={About} />
         </Switch>
       </div>
     );

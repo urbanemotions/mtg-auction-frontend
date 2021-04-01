@@ -1,26 +1,25 @@
 import React from "react";
-import MtgcardsContainer from "./MtgcardsContainer";
 
 class MtgcardsDetail extends React.Component {
 
     render() {
 
-        // console.log(this.props.mtgcards)
-        // const {name, image, year, overall_condition, centering, corners, edges, surface, card_serial_number, graded_by} = this.props.renderMtgcards
+        console.log(this.props.name)
+        // const {name, image, year, overall_condition, centering, corners, edges, surface, card_serial_number, graded_by} = this.props
 
         return ( 
             <div className="mtgcard">
-                <img alt={this.props.renderMtgcards.name} src={this.props.renderMtgcards.image} />
-                <h3>{this.props.mtgcards.name}</h3>
+                <img alt={this.props.name} src={this.props.image} />
+                <h3>{this.props.name}</h3>
                 <h4>
-                    Year: {this.props.mtgcards.year}<br/>
-                    Overall Condition: {this.props.mtgcards.overall_condition}<br/>
-                    Centering: {this.props.mtgcards.centering}<br/>
-                    Corners: {this.props.mtgcards.corners}<br/>
-                    Edges: {this.props.mtgcards.edges}<br/>
-                    Surface: {this.props.mtgcards.surface}<br/>
-                    Card Serial Number: {this.props.mtgcards.card_serial_number}<br/>
-                    Graded by: {this.props.mtgcards.graded_by}<br/>
+                    Year: {this.props.year}<br/>
+                    Overall Condition: {this.props.overall_condition}<br/>
+                    Centering: {this.props.centering}<br/>
+                    Corners: {this.props.corners}<br/>
+                    Edges: {this.props.edges}<br/>
+                    Surface: {this.props.surface}<br/>
+                    Card Serial Number: {this.props.card_serial_number}<br/>
+                    Graded by: {this.props.graded_by}<br/>
                 </h4>
             </div>
         );

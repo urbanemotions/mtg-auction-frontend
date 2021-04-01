@@ -5,7 +5,7 @@ class MtgcardsContainer extends React.Component {
 
 // change to props when using cdm in app
     renderMtgcards = () => {
-        return this.props.mtgcards.map(mtgcard => <MtgcardsDetail
+        return this.props.renderMtgcards.map(mtgcard => <MtgcardsDetail
             image={mtgcard.image}
             name={mtgcard.name}
             year={mtgcard.year}
