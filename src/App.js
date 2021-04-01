@@ -1,25 +1,22 @@
 import React, { Component } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
-import SignupForm from "./components/SignupForm"
-import LoginForm from "./components/LoginForm"
+// import Navbar from "./components/Navbar";
+// import SignupForm from "./components/SignupForm"
+// import LoginForm from "./components/LoginForm"
 import MtgcardsContainer from "./components/MtgcardsContainer"
 // import MtgcardsDetail from "./components/MtgcardsDetail"
 // import AuctionbidForm from "./components/AuctionbidForm"
-import About from './components/About'
+// import About from './components/About'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
 
 class App extends Component {
 
-  state = {
-    // name: " ",
-    // username: " ", 
+  state = { 
     user: null,
-    mtgcardsContainer: [],
-    // mtgcard: [], 
-    mtgcardsdetail: [],
-    bid: 0
+    mtgcardsContainer: []
+    // mtgcard: [],
+    // bid: 0
   }
 
   //signup form 
@@ -50,7 +47,7 @@ class App extends Component {
   //login form
   // get from login form fetch, post into login Route - backend, send back user and set state here in 
   handleLogin = (userData) => {
-    const { name, username } = userData
+    // const { name, username } = userData
     fetch('http://localhost:3000/login')
       .then(res => res.json())
       .then(userData => {
@@ -65,7 +62,7 @@ class App extends Component {
       .then(mtgcardArray => this.setState({ mtgcardsContainer: mtgcardArray }))
   }
 
-  mtgcardscontainer = () => <MtgcardsContainer renderMtgcards={this.state.mtgcardsContainer} />
+  mtgcardscontainer = () => <MtgcardsContainer mtgcards={this.state.mtgcardsContainer} />
 
   render() {
     return (
