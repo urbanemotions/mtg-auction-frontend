@@ -60,7 +60,6 @@ class App extends Component {
 
   //mtgcardscontainer
   componentDidMount() {
-    // const { name, image, year, overall_condition, centering, corners, edges, surface, card_serial_number, graded_by } = mtgcardArray
     fetch('http://localhost:3000/mtgcards')
       .then(res => res.json())
       .then(mtgcardArray => this.setState({ mtgcardsContainer: mtgcardArray }))
@@ -74,7 +73,7 @@ class App extends Component {
         <Switch>
           {/* <Route path='/signup' exact render={() => <SignupForm handleSignup={this.handleSignup} />} />
           <Route path='/login' exact render={() => <LoginForm handleLogin={this.handleLogin} />} /> */}
-          <Route path='/MtgcardsContainer' exact component={this.mtgcardscontainer} />
+          <Route path='/MtgcardsContainer' component={this.mtgcardscontainer} />
           {/* <Route path='/' component={About} /> */}
         </Switch>
       </div>

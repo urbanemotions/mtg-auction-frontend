@@ -3,8 +3,6 @@ import MtgcardsDetail from "./MtgcardsDetail";
 
 class MtgcardsContainer extends React.Component {
 
-
-
 // change to props when using cdm in app
     renderMtgcards = () => {
         return this.props.renderMtgcards.map(mtgcard => <MtgcardsDetail
@@ -22,6 +20,7 @@ class MtgcardsContainer extends React.Component {
     }
 
     render() {
+        // console.log(this.props.renderMtgcards)
         return (
             <div>{this.renderMtgcards()}</div>
         )
