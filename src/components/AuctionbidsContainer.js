@@ -6,7 +6,7 @@ class AuctionbidsContainer extends React.Component {
     renderAuctionbids = () => {
         return this.props.renderAuctionbids.map(auctionbid => <AuctionbidForm
             bid={auctionbid.bid}
-            key={auctionbid.id}
+            // key={auctionbid.id}
         />)
     }
 

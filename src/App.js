@@ -15,8 +15,7 @@ class App extends Component {
   state = { 
     user: null,
     mtgcardsContainer: [], 
-    // mtgcard: [],
-    bid: 0
+    auctionbidsContainer: []
   }
 
   //signup form 
