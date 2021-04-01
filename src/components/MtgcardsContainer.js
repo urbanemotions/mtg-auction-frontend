@@ -1,5 +1,6 @@
 import React from "react";
 import MtgcardsDetail from "./MtgcardsDetail";
+// import AuctionbidForm from "./AuctionbidForm";
 
 class MtgcardsContainer extends React.Component {
 
@@ -16,13 +17,16 @@ class MtgcardsContainer extends React.Component {
             card_serial_number={mtgcard.card_serial_number}
             graded_by={mtgcard.graded_by}
             key={mtgcard.id}
+            mtgcard={mtgcard}
         />)
     }
 
     render() {
         // console.log(this.props.renderMtgcards)
         return (
-            <div>{this.renderMtgcards()}</div>
+            <div>
+                <div>{this.renderMtgcards()}</div>
+            </div> 
         )
     }
 }

@@ -6,10 +6,20 @@ class AuctionbidForm extends React.Component {
         bid: 0
     }
 
+    handleBid = (bidData) => {
+    fetch('http://localhost:3000/auctionbids')
+      .then(res => res.json())
+      .then(bidData => {
+        this.setState({ bid: bidData })
+      })
+  }
+
     onBid = event => {
         event.preventDefault();
         let info = {
-            bid: this.state.bid
+            bid: this.state.bid,
+            user_id: this.state.bid.user_id,
+            mtgcard_id: this.state.bid.mtgcard_id
         };
         this.props.handleBid(info)
     };
@@ -20,19 +30,18 @@ class AuctionbidForm extends React.Component {
                 <h3>Auction Bid: </h3>
                 <div className="auctionbid card">
                     <form className="auctionbid form" onSubmit={this.onBid}>
-                        <label for="Bid">Bid: </label>
+                    {/* <form className="auctionbid form" onSubmit={this.handleBid}> */}
+                        <label for="Bid">$ </label>
                         <input
                             className="auctionbid field"
                             name="bid"
                             value={this.state.bid}
                             onChange={event => this.setState({ bid: event.target.value })}
+                            // onClick={}
                         />
                         <button className="bid button" type="submit">Bid</button>
                     </form>
                 </div>
-                {/* need to create a form for allowing user to create a bid 
-                need to create a form for allowing user to edit a bid
-                need to create a form for deleting a bid */}
             </div>
         )
     }
