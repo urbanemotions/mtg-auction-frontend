@@ -4,7 +4,7 @@ import "./App.css";
 import SignupForm from "./components/SignupForm"
 import LoginForm from "./components/LoginForm"
 import MtgcardsContainer from "./components/MtgcardsContainer"
-// import MtgcardsDetail from "./components/MtgcardsDetail"
+import AuctionbidsContainer from "./components/AuctionbidsContainer"
 // import AuctionbidForm from "./components/AuctionbidForm"
 import About from './components/About'
 import { Route, Switch, withRouter } from 'react-router-dom'
@@ -14,9 +14,9 @@ class App extends Component {
 
   state = { 
     user: null,
-    mtgcardsContainer: []
+    mtgcardsContainer: [], 
     // mtgcard: [],
-    // bid: 0
+    bid: 0
   }
 
   //signup form 
@@ -36,11 +36,7 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(newUser => {
-        this.setState({
-          // name: usnewUser.name, 
-          // username: newUser.username   
-          user: newUser
-        }, () => { this.props.history.push("/") }) //back to main page
+        this.setState({ user: newUser }, () => { this.props.history.push("/") }) //back to about page
       })
   }
 
@@ -60,9 +56,34 @@ class App extends Component {
     fetch('http://localhost:3000/mtgcards')
       .then(res => res.json())
       .then(mtgcardArray => this.setState({ mtgcardsContainer: mtgcardArray }))
+    fetch('http://localhost:3000/auctionbids')
+      .then(res => res.json())
+      .then(bidArray => this.setState({ auctionbidsContainer: bidArray }))
   }
 
   mtgcardscontainer = () => <MtgcardsContainer renderMtgcards={this.state.mtgcardsContainer} />
+  // not allowed two cdm
+  //bids shown in auctionbidscontainers 
+  // componentDidMount() {
+    // fetch('http://localhost:3000/auctionbids')
+    //   .then(res => res.json())
+    //   .then(bidArray => this.setState({ auctionbidsContainer: bidArray }))
+  // }
+  auctionbidscontainer = () => <AuctionbidsContainer renderAuctionbids={this.state.auctionbidsContainer} />
+
+  // p = Promise.all([
+  //   fetch('http://localhost:3000/mtgcards'),
+  //   fetch('http://localhost:3000/auctionbids')
+  // ]).then(([mtgcards, auctionbids]) => console.log(mtgcards.json()));
+
+// bid form
+  handleBid = (bidData) => {
+    fetch('http://localhost:3000/auctionbids')
+      .then(res => res.json())
+      .then(bidData => {
+        this.setState({ bid: bidData }, () => { this.props.history.push("/") })
+      })
+  }
 
   render() {
     return (
@@ -71,6 +92,7 @@ class App extends Component {
           <Route path='/signup' render={() => <SignupForm handleSignup={this.handleSignup} />} />
           <Route path='/login' render={() => <LoginForm handleLogin={this.handleLogin} />} />
           <Route path='/MtgcardsContainer' component={this.mtgcardscontainer} />
+          <Route path='/AuctionbidsContainer' component={this.auctionbidscontainer} />
           <Route path='/' component={About} />
         </Switch>
       </div>

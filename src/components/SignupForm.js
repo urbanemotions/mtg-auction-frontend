@@ -18,24 +18,27 @@ class SignupForm extends React.Component {
 
     render() {
         return (
-            <div className="signup card">
-                <form className="signup form" onSubmit={this.onSignup}>
-                    <label for="Name">Name: </label>
-                    <input
-                        className="name field"
-                        name="name"
-                        value={this.state.name}
-                        onChange={event => this.setState({ name: event.target.value })}
-                    />
-                    <label for="Username"> Username: </label>
-                    <input
-                        className="username field"
-                        name="username"
-                        value={this.state.username}
-                        onChange={event => this.setState({ username: event.target.value })}
-                    />
-                    <button className="signup button" type="submit">Signup</button>
-                </form>
+            <div>
+                <h3>Signup: </h3>
+                <div className="signup card">
+                    <form className="signup form" onSubmit={this.onSignup}>
+                        <label for="Name">Name: </label>
+                        <input
+                            className="name field"
+                            name="name"
+                            value={this.state.name}
+                            onChange={event => this.setState({ name: event.target.value })}
+                        />
+                        <label for="Username"> Username: </label>
+                        <input
+                            className="username field"
+                            name="username"
+                            value={this.state.username}
+                            onChange={event => this.setState({ username: event.target.value })}
+                        />
+                        <button className="signup button" type="submit">Signup</button>
+                    </form>
+                </div>
             </div>
         );
     }
