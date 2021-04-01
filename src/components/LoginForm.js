@@ -1,33 +1,27 @@
 import React from "react";
 
 class LoginForm extends React.Component {
-    
-    constructor() {
-        this.state = {
-            name: " ",
-            username: " "
-        };
+
+    state = {
+        name: " ",
+        username: " "
     }
     
     onLoginCheck = event => {
         event.preventDefault();
         let info = {
-          name: this.state.name,
-          username: this.state.username
+            name: this.state.name,
+            username: this.state.username
         };
-        alert('Welcome ' + this.state.value);
-// how do you check if the value is equal to the signedup user
+        this.props.handleLogin(info)
+        // alert('Welcome ' + this.state.value);
     };
-
-    // if i used this i would need two to get the value of name and username fields
-    // handleChange(event) {
-    //     this.setState({name: event.target.value});
-    // }
 
     render() {
         return (
             <div className="login card">
                 <form className="login form" onSubmit={this.onLoginCheck}>
+                    <label for="Name">Name: </label>
                     <input 
                         type="text"
                         className="name field"
@@ -35,6 +29,7 @@ class LoginForm extends React.Component {
                         value={this.state.name}
                         onChange={event => this.setState({ name: event.target.value })}
                     />
+                    <label for="Username"> Username: </label>
                     <input
                         type="text"
                         className="username field"
@@ -42,7 +37,7 @@ class LoginForm extends React.Component {
                         value={this.state.username}
                         onChange={event => this.setState({ username: event.target.value })}
                     />
-                    <button className="login button" type="Login" onClick={this.props.login}>Login</button>
+                    <button className="login button" type="submit">Login</button>
                 </form>
             </div>
         );
