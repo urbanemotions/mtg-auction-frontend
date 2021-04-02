@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-// import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import SignupForm from "./components/SignupForm"
 import LoginForm from "./components/LoginForm"
 import MtgcardsContainer from "./components/MtgcardsContainer"
@@ -68,7 +68,7 @@ class App extends Component {
     //   .then(bidArray => this.setState({ auctionbidsContainer: bidArray }))
   }
 
-  mtgcardscontainer = () => <MtgcardsContainer renderMtgcards={this.state.mtgcardsContainer} handleBid={this.handleBid}/>
+  // mtgcardscontainer = () => 
 
   // auctionbidscontainer = () => <AuctionbidsContainer renderAuctionbids={this.state.auctionbidsContainer} />
 
@@ -89,8 +89,17 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(bidData => {
-        this.setState({
-          // map it statement .map (something=>{if ()})
+        this.setState({ 
+          mtgcardsContainer: this.state.mtgcardsContainer.map(card => { 
+            if (mtgcardid === card.id) {
+              return {...card, 
+                auctionbids: [...card.auctionbids, bidData]
+              }
+            }
+            else {
+              return card
+            }
+          })
         })
       })
   }
@@ -98,10 +107,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Navbar />
         <Switch>
           <Route path='/signup' render={() => <SignupForm handleSignup={this.handleSignup} />} />
           <Route path='/login' render={() => <LoginForm handleLogin={this.handleLogin} />} />
-          <Route path='/MtgcardsContainer' component={this.mtgcardscontainer} />
+          <Route path='/mtgcards' render={() => {return <MtgcardsContainer renderMtgcards={this.state.mtgcardsContainer} handleBid={this.handleBid}/>}}/>
           {/* <Route path='/AuctionbidsContainer' component={this.auctionbidscontainer} /> */}
           <Route path='/' component={About} />
         </Switch>
