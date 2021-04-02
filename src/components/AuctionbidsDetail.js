@@ -3,32 +3,22 @@ import React from "react";
 
 class AuctionbidsDetail extends React.Component {
 
-    updateBid = () => {
-        let updateBid = {
-            // bid: auctionbid,
-            // mtgcard_id: mtgcard_id, 
-            // user_id: user_id
-        }  
-        fetch(`http://localhost:3000/auctionbids/${this.props.auctionbid.id}`, {
-            method: 'PATCH',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }, 
-            body: JSON.stringify(updateBid)
-        })
-        .then(res => res.json())
-        .then(bid => this.setState(bid = updateBid))
-    }
+    onUpdateBid = event => {
+        event.preventDefault();
+        let info = this.state;
+        this.props.updateBid(info, this.props.auctionbid.bid)
+    };
 
-    // RAN OUT OF IDEAS WHY - deletes but wont see that until page refresh 
+    
     deleteBid = () => {
         fetch(`http://localhost:3000/auctionbids/${this.props.auctionbid.id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
-        // .then(bids => { this.setState({ bids: this.props.auctionbid})})
-        // .then(bids => this.props.auctionbid)
+        // SETSTATE ISSUE - deletes but wont see that until page refresh 
+        // this.setState({...this.state})
+        // this.setState({auctionbids: this.props.mtgcard.auctionbids.map(auctionbid => <AuctionbidsDetail auctionbid={auctionbid} key={auctionbid.id}/>)})
+        // this.setState({ auctionbids: this.props.auctionbid.filter(bids => bids.id !== this.props.auctionbid.id)})
     }
 
     render() {
@@ -39,10 +29,19 @@ class AuctionbidsDetail extends React.Component {
                     <h4>
                         Bid: ${this.props.auctionbid.bid}<br />
                         Name: {this.props.auctionbid.user.name}<br />
-                        <button 
-                            className="update button"   
-                            onClick={()=>{this.updateBid(this.props.auctionbid.bid)}}
-                            type="submit">Update Bid</button> {" "}
+                        <form className="update form" onSubmit={this.onUpdateBid}>
+                            <label for="Bid">$ </label>
+                            <input
+                                className="update auctionbid field"
+                                name="update bid"
+                                value={this.state.bid}
+                                onChange={event => this.setState({ bid: event.target.value })}
+                            />
+                            <button 
+                                className="update button"   
+                                // onClick={()=>{this.updateBid(this.props.auctionbid.bid)}}
+                                type="submit">Update Bid</button> 
+                        </form>
                         <button 
                             className="delete button" 
                             onClick={()=>{this.deleteBid(this.props.auctionbid.bid)}}

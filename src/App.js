@@ -102,6 +102,40 @@ class App extends Component {
       })
   }
 
+  updateBid = (bidData, mtgcardid) => {
+    const updateBid = {
+        bid: bidData.bid, 
+        mtgcard_id: mtgcardid, 
+        user_id: this.state.user.id
+    }  
+    fetch(`http://localhost:3000/auctionbids/${this.props.auctionbid.id}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }, 
+        body: JSON.stringify(updateBid)
+    })
+    .then(res => res.json())
+    .then(bidData => {
+        // this.setState(bid = updateBid))
+        this.setState({ 
+            mtgcardsContainer: this.state.mtgcardsContainer.map(card => {
+                auctionbids: this.state.auctionbids.map(bid => {
+                    if (bidData.bid.id === bid.id) {
+                        return
+                    }
+                    else {
+                        return bid
+                    }
+
+                }) 
+              
+            })
+        })
+    })
+}
+
   render() {
     return (
       <div className="App">
@@ -109,7 +143,7 @@ class App extends Component {
         <Switch>
           <Route path='/signup' render={() => <SignupForm handleSignup={this.handleSignup} />} />
           <Route path='/login' render={() => <LoginForm handleLogin={this.handleLogin} />} />
-          <Route path='/mtgcards' render={() => {return <MtgcardsContainer renderMtgcards={this.state.mtgcardsContainer} handleBid={this.handleBid}/>}}/>
+          <Route path='/mtgcards' render={() => {return <MtgcardsContainer renderMtgcards={this.state.mtgcardsContainer} handleBid={this.handleBid} updateBid={this.updateBid}/>}}/>
           {/* <Route path='/AuctionbidsContainer' component={this.auctionbidscontainer} /> */}
           <Route path='/' component={About} />
         </Switch>
