@@ -3,22 +3,13 @@ import React from "react";
 
 class AuctionbidsDetail extends React.Component {
 
-    // const {bid, id} = this.props.auctionbid
-    // bid.id is not defined. RAN OUT OF IDEAS WHY ITS UNDEFINED
-    deleteBid = (auctionbid) => {
-        fetch(`http://localhost:3000/auctionbids/${auctionbid.id}`, {
-            method: 'DELETE'
-        })
-        .then(res => res.json())
-    }
-
-    updateBid = (auctionbid) => {
+    updateBid = () => {
         let updateBid = {
-            bid: auctionbid,
+            // bid: auctionbid,
             // mtgcard_id: mtgcard_id, 
             // user_id: user_id
         }  
-        fetch(`http://localhost:3000/auctionbids/${auctionbid.id}`, {
+        fetch(`http://localhost:3000/auctionbids/${this.props.auctionbid.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -30,9 +21,18 @@ class AuctionbidsDetail extends React.Component {
         .then(bid => this.setState(bid = updateBid))
     }
 
+    // RAN OUT OF IDEAS WHY - deletes but wont see that until page refresh 
+    deleteBid = () => {
+        fetch(`http://localhost:3000/auctionbids/${this.props.auctionbid.id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        // .then(bids => { this.setState({ bids: this.props.auctionbid})})
+        // .then(bids => this.props.auctionbid)
+    }
 
     render() {
-        // console.log(bid.id)
+        console.log(this.props.auctionbid.id)
         return (
             <div>
                 <div className="bidcard">

@@ -92,9 +92,7 @@ class App extends Component {
         this.setState({ 
           mtgcardsContainer: this.state.mtgcardsContainer.map(card => { 
             if (mtgcardid === card.id) {
-              return {...card, 
-                auctionbids: [...card.auctionbids, bidData]
-              }
+              return {...card, auctionbids: [...card.auctionbids, bidData]}
             }
             else {
               return card

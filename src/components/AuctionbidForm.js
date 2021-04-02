@@ -9,12 +9,11 @@ class AuctionbidForm extends React.Component {
     onBid = event => {
         event.preventDefault();
         let info = this.state;
-        
         this.props.handleBid(info, this.props.mtgcardid)
     };
 
     render() {
-        console.log(this.props.handleBid)
+        // console.log(this.props.mtgcardid)
         return (
             <div>
                 <h3>Auction Bid: </h3>
@@ -26,7 +25,6 @@ class AuctionbidForm extends React.Component {
                             name="bid"
                             value={this.state.bid}
                             onChange={event => this.setState({ bid: event.target.value })}
-                            // onClick={} dont need onclick since i have onsubmit
                         />
                         <button className="bid button" type="submit">Bid</button>
                     </form>
