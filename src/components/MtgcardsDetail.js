@@ -27,7 +27,7 @@ class MtgcardsDetail extends React.Component {
                     Graded by: {this.props.graded_by}<br/>
                 </h4>
                 <h4>{this.auctionbids()}</h4>
-                <div><AuctionbidForm /></div>
+                <div><AuctionbidForm handleBid={this.props.handleBid} mtgcardid={this.props.mtgcard.id}/></div>
                 <br/>
             </div>
         );

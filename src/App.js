@@ -42,8 +42,16 @@ class App extends Component {
   //login form
   // get from login form fetch, post into login Route - backend, send back user and set state here in 
   handleLogin = (userData) => {
+    console.log(userData)
     // const { name, username } = userData
-    fetch('http://localhost:3000/login')
+    fetch('http://localhost:3000/login', {
+      method: 'post',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(userData)
+    })
       .then(res => res.json())
       .then(userData => {
         this.setState({ user: userData }, () => { this.props.history.push("/") })
@@ -60,11 +68,32 @@ class App extends Component {
     //   .then(bidArray => this.setState({ auctionbidsContainer: bidArray }))
   }
 
-  mtgcardscontainer = () => <MtgcardsContainer renderMtgcards={this.state.mtgcardsContainer} />
+  mtgcardscontainer = () => <MtgcardsContainer renderMtgcards={this.state.mtgcardsContainer} handleBid={this.handleBid}/>
 
   // auctionbidscontainer = () => <AuctionbidsContainer renderAuctionbids={this.state.auctionbidsContainer} />
 
-
+  handleBid = (bidData, mtgcardid) => {
+    // console.log(bidData, mtgcardid)
+    const newBid = {
+        bid: bidData.bid, 
+        mtgcard_id: mtgcardid, 
+        user_id: this.state.user.id
+    }
+    fetch('http://localhost:3000/auctionbids', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }, 
+        body: JSON.stringify(newBid)
+    })
+      .then(res => res.json())
+      .then(bidData => {
+        this.setState({
+          // map it statement .map (something=>{if ()})
+        })
+      })
+  }
 
   render() {
     return (
@@ -73,7 +102,6 @@ class App extends Component {
           <Route path='/signup' render={() => <SignupForm handleSignup={this.handleSignup} />} />
           <Route path='/login' render={() => <LoginForm handleLogin={this.handleLogin} />} />
           <Route path='/MtgcardsContainer' component={this.mtgcardscontainer} />
-          {/* <Route path='/login' render={() => <LoginForm handleLogin={this.handleLogin} />} /> */}
           {/* <Route path='/AuctionbidsContainer' component={this.auctionbidscontainer} /> */}
           <Route path='/' component={About} />
         </Switch>

@@ -18,6 +18,7 @@ class MtgcardsContainer extends React.Component {
             graded_by={mtgcard.graded_by}
             key={mtgcard.id}
             mtgcard={mtgcard}
+            handleBid={this.props.handleBid}
         />)
     }
 
